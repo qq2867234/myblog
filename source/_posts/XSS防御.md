@@ -23,6 +23,7 @@ XSS 全称Cross Site Script，跨站脚本攻击，HTML注入。
 
 HttpOnly并不是万能的，添加了不等于解决了XSS问题，它有助于缓解XSS攻击，但仍然需要其他能够解决XSS漏洞的方案。
 
+
 #### 输入检查（没有结合语境，不够智能）
 
 输入检查，很多时候被用于格式检查，必须放在服务器端代码中实现。
@@ -35,31 +36,33 @@ HttpOnly并不是万能的，添加了不等于解决了XSS问题，它有助于
 
 输入数据，还可能被展示在多个地方呢，每个地方的语境可能各不相同，如果使用单一的替换操作，则可能会出现问题。
 
+
 #### 输出检查
 
 除了富文本的输出外，在变量输出到HTML页面时，可以使用编码或转义的方式来防御XSS攻击。
 
 为了对抗XSS，在HtmlEncode中要求至少转换以下字符：
-& -> `&amp;`  
-< -> `&lt;`  
-&gt; -> `&gt;`  
-" -> `&quot;`  
-' -> `&#x27;`  
-/ -> `&#x2F;`
+
+	& -> `&amp;`  
+	< -> `&lt;`  
+	> -> `&gt;`  
+	" -> `&quot;`  
+	' -> `&#x27;`  
+	/ -> `&#x2F;`
 
 JavaScript的编码方式可以使用JavascriptEncode，并且在对抗XSS时，还要求输出的变量必须在括号内部，以避免造成安全问题。
 
 比较下面两种写法：
-```
-var x = escapeJavascript($evil);
-var y = '"'+escapeJavascript($evil)+'"';
-```
+
+	var x = escapeJavascript($evil);
+	var y = '"'+escapeJavascript($evil)+'"';
+
 
 上面的两行代码可能会变成：
-```
-var x = 1;alert('xxs');
-var y = "1;alert('xxs');";
-```
+
+	var x = 1;alert('xxs');
+	var y = "1;alert('xxs');";
+
 
 前者执行了而外的代码，后者则是安全的。
 在“Apache Common Lang”的“StringEscapeUtils”里，提供了许多的escape函数。
