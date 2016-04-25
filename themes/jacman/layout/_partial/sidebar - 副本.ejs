@@ -1,0 +1,34 @@
+
+<% if(!table){ %>
+<div class="openaside"><a class="navbutton" href="#" title="<%= __('showsidebar') %>"></a></div>
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="<%= __('hidesidebar') %>"></a></div>
+<aside class="clearfix">
+<% theme.widgets.forEach(function(widget){ %>
+  <%- partial('../_widget/' + widget) %>
+<% }); %>
+</aside>
+</div>
+<% } %>
+
+<% if(table){ %>
+<div class="openaside" style="display:block;"><a class="navbutton" href="#" title="<%= __('showsidebar') %>"></a></div>
+<% if( table&&(item.toc !== false) && theme.toc.aside){ %>
+  <div id="toc" class="toc-aside" style="display:block;">
+  <strong class="toc-title"><%= __('contents') %></strong>
+ <% if(item.list_number == false) {%>
+ <%- toc(item.content,{list_number:false}) %>
+ <% }else{ %>
+ <%- toc(item.content) %>
+ <% } %>
+  </div>
+<% } %>
+<div id="asidepart" style="display:none;">
+<div class="closeaside"><a class="closebutton" href="#" title="<%= __('hidesidebar') %>"></a></div>
+<aside class="clearfix">
+<% theme.widgets.forEach(function(widget){ %>
+  <%- partial('../_widget/' + widget) %>
+<% }); %>
+</aside>
+</div>
+<% } %>

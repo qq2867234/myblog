@@ -38,7 +38,7 @@ relative_link: false
 future: true
 highlight:
   enable: true
-  line_number: true
+  line_number: false
   tab_replace:
 
 # Category & Tag
@@ -63,11 +63,12 @@ plugins:
 - hexo-generator-feed
 - hexo-generator-sitemap
 
+
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: yilia
-#theme: pacman
+# theme: yilia
+theme: jacman
 
 # Stylus
 stylus:
